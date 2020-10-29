@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { serverUrl } from '../../../config';
+import axios from 'axios';
+
 
 class RegisterPage extends Component {
     state = {
@@ -14,23 +17,34 @@ class RegisterPage extends Component {
 
     onSubmitForm = (e) => {
         e.preventDefault();
+        let errors = {};
         const regex_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-        const {firstName, lastName, email, errors } = this.state;
+        const {firstName, lastName, email} = this.state;
         if(firstName.trim()==="")
         {
-            //var errors["firstName"]="Введіть ім'я";
-            this.setState({errorMessage: "Не валідна форма!",
-                            errors: {firstName: "Введіть ім'я"}});
-            
+            errors = {
+                ...errors,
+                firstName: "Введіть ім'я"
+            };
         }
-        else if (!regex_email.test(email.trim()))
+        if(!regex_email.test(email.trim()))
         {
-            this.setState({errorMessage: "Не вірна електронна пошта!"});
+            errors = {
+                ...errors,
+                email: "Не вірна електронна пошта!"
+            };
+        }
+        const isValid = Object.keys(errors).length === 0;
+        if (isValid) {
+            //serverUrl
+            axios.post();
+            //ajax in server
+            this.setState({ errorMessage: "", errors });
         }
         else {
-            this.setState({errorMessage: ""});
+            this.setState({errorMessage: "Не валідна форма!", errors});
         }
-        //var model = 
+        
         console.log("SubmitForm");
     }
 
@@ -74,8 +88,8 @@ class RegisterPage extends Component {
                                     id="firstName"
                                     name="firstName"
                                     value={firstName} />
-                                    <p className="text-danger">{errors["firstName"]}</p>
                             </div>
+                            <p className="text-danger">{errors["firstName"]}</p>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-user"></i> </span>
@@ -100,6 +114,7 @@ class RegisterPage extends Component {
                                     name="email"
                                     value={email} />
                             </div>
+                            <p className="text-danger">{errors["email"]}</p>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-phone"></i> </span>
