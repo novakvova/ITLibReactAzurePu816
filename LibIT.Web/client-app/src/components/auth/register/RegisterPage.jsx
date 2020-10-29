@@ -37,7 +37,20 @@ class RegisterPage extends Component {
         const isValid = Object.keys(errors).length === 0;
         if (isValid) {
             //serverUrl
-            axios.post();
+            const url = `${serverUrl}api/Account/register`;
+            const model = {
+                Email: email
+            };
+            axios.post(url, model)
+                .then(
+                    (resp) => {
+                    },
+                    (badResp) => {
+                    }
+                )
+                .catch(err => {
+                    console.log("Global server prooblem in controller message", err);
+                });
             //ajax in server
             this.setState({ errorMessage: "", errors });
         }
