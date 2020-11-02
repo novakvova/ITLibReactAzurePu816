@@ -11,6 +11,7 @@ class RegisterPage extends Component {
         lastName: "",
         email: "",
         errorMessage: "",
+        loading: false,
         errors: {
             //firstName: "Введіть ім'я"
         }
@@ -40,18 +41,22 @@ class RegisterPage extends Component {
             const model = {
                 Email: email
             };
+           
             axios.post(url, model)
                 .then(
                     (resp) => {
+                        this.setState({loading: false });
                     },
                     (badResp) => {
+                        this.setState({loading: false });
                     }
                 )
                 .catch(err => {
                     console.log("Global server prooblem in controller message", err);
+                    this.setState({loading: false });
                 });
             //ajax in server
-            this.setState({ errorMessage: "", errors });
+            this.setState({ errorMessage: "", errors, loading: true });
         }
         else {
             this.setState({ errorMessage: "Не валідна форма!", errors });
