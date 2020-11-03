@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { serverUrl } from '../../../config';
 import EclipseWidget from '../../common/eclipse';
 import axios from 'axios';
+import TextFieldGroup from '../../common/TextFieldGroup';
 
 
 class RegisterPage extends Component {
@@ -10,6 +11,7 @@ class RegisterPage extends Component {
         firstName: "",
         lastName: "",
         email: "",
+        password: "",
         errorMessage: "",
         loading: false,
         errors: {
@@ -28,6 +30,14 @@ class RegisterPage extends Component {
                 firstName: "Введіть ім'я"
             };
         }
+
+        if (lastName.trim() === "") {
+            errors = {
+                ...errors,
+                lastName: "Введіть прізвище"
+            };
+        }
+
         if (!regex_email.test(email.trim())) {
             errors = {
                 ...errors,
@@ -75,10 +85,12 @@ class RegisterPage extends Component {
         const { firstName,
             lastName,
             email,
+            password,
             errorMessage,
             loading,
             errors
         } = this.state;
+        console.log("Is Erors email:", !!errors["email"]);
         return (
             <>
                 <div className="container">
@@ -96,7 +108,7 @@ class RegisterPage extends Component {
                                 <span className="bg-light">OR</span>
                             </p>
                             <form onSubmit={this.onSubmitForm}>
-                                <div className="form-group input-group">
+                                {/* <div className="form-group input-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"> <i className="fa fa-user"></i> </span>
                                     </div>
@@ -108,24 +120,42 @@ class RegisterPage extends Component {
                                         name="firstName"
                                         value={firstName} />
                                 </div>
-                                <p className="text-danger">{errors["firstName"]}</p>
-                                <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"> <i className="fa fa-user"></i> </span>
-                                    </div>
-                                    <input className="form-control"
-                                        onChange={this.handlerChange}
-                                        placeholder="Last name"
-                                        type="text"
-                                        id="lastName"
-                                        name="lastName"
-                                        value={lastName} />
-                                </div>
-                                <div className="form-group input-group">
+                                <p className="text-danger">{errors["firstName"]}</p> */}
+
+
+                                <TextFieldGroup 
+                                    field="firstName"
+                                    value={firstName}
+                                    label="Ім'я"
+                                    icon="fa fa-user"
+                                    //placeholder="Firstname"
+                                    error={errors.firstName}
+                                    onChange={this.handlerChange}/>
+
+                                <TextFieldGroup 
+                                    field="lastName"
+                                    value={lastName}
+                                    label="Прізвище"
+                                    icon="fa fa-user"
+                                    //placeholder="Lastname"
+                                    error={errors.lastName}
+                                    onChange={this.handlerChange}/>
+
+                                <TextFieldGroup 
+                                    field="email"
+                                    value={email}
+                                    label="Ектронна пошта"
+                                    icon="fa fa-envelope"
+                                    type="email"
+                                    //placeholder="Email"
+                                    error={errors.email}
+                                    onChange={this.handlerChange}/>
+                                
+                                {/* <div className="form-group input-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
                                     </div>
-                                    <input name="" className="form-control"
+                                    <input name="" className={classnames("form-control", {"is-invalid": !!errors["email"]}) }
                                         onChange={this.handlerChange}
                                         placeholder="Email address"
                                         type="email"
@@ -133,19 +163,31 @@ class RegisterPage extends Component {
                                         name="email"
                                         value={email} />
                                 </div>
-                                <p className="text-danger">{errors["email"]}</p>
+                                {!!errors["email"] && <p className="text-danger">{errors["email"]}</p>} */}
                                 <div className="form-group input-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"> <i className="fa fa-phone"></i> </span>
                                     </div>
                                     <input name="" className="form-control" placeholder="Phone number" type="text" />
                                 </div>
-                                <div className="form-group input-group">
+
+                                <TextFieldGroup 
+                                    field="password"
+                                    value={password}
+                                    label="Пароль"
+                                    icon="fa fa-lock"
+                                    type="password"
+                                    //placeholder="Email"
+                                    error={errors.password}
+                                    onChange={this.handlerChange}/>
+
+
+                                {/* <div className="form-group input-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                                     </div>
                                     <input className="form-control" placeholder="Password" type="password" />
-                                </div>
+                                </div> */}
                                 <div className="form-group input-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
