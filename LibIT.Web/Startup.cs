@@ -126,7 +126,7 @@ namespace LibIT.Web
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "client-app/build";
+                configuration.RootPath = "ClientApp/build";
             });
         }
 
@@ -177,7 +177,7 @@ namespace LibIT.Web
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "client-app";
+                spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
