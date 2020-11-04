@@ -3,10 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.5",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
+    "babel-eslint": "10.1.0",
     "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.8.0",
@@ -23,7 +21,23 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rimraf": "^3.0.2",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "webpack": "4.44.2"
+  },
+  "devDependencies": {
+    "ajv": "^6.10.2",
+    "babel-eslint": "10.1.0",
+    "babel-loader": "^8.0.6",
+    "cross-env": "^6.0.0",
+    "css-loader": "^3.2.0",
+    "eslint": "^7.12.1",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "style-loader": "^1.0.0"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",
@@ -34,8 +48,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {

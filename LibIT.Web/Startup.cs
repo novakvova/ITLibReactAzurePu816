@@ -151,6 +151,8 @@ namespace LibIT.Web
                 Directory.CreateDirectory(folder);
             }
 
+            app.UseSpaStaticFiles();
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(folder),
