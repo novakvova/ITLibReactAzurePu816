@@ -19,15 +19,10 @@ const Navbar = React.lazy(() => import('./components/navbar/Navbar'));
 const RegisterPage = React.lazy(() => import('./components/auth/register/RegisterPage'));
 const LoginPage = React.lazy(() => import('./components/auth/login/LoginPage'));
 
-const renderLoader = () => <p>Loading ...</p>;
-
-
 class App extends Component {
     render() {
         return (
-
-            <Suspense fallback={renderLoader}>
-                <Router>
+            <Suspense fallback={<p>Loading ...</p>}>
                     <Navbar />
                     <div className="container">
 
@@ -39,8 +34,6 @@ class App extends Component {
                             <Route exact path='/register' render={() => <RegisterPage />} />
                         </Switch>
                     </div>
-
-                </Router>
             </Suspense>
             
         );
