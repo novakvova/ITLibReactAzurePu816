@@ -16,7 +16,7 @@ import './App.css';
 //import Navbar from './components/navbar/Navbar';
 const HomePage = React.lazy(() => import('./components/home/HomePage'));
 const Navbar = React.lazy(() => import('./components/navbar/Navbar'));
-const RegisterPage = React.lazy(() => import('./components/auth/register/RegisterPage'));
+const Register = React.lazy(() => import('./components/auth/register'));
 const LoginPage = React.lazy(() => import('./components/auth/login/LoginPage'));
 
 class App extends Component {
@@ -31,7 +31,7 @@ class App extends Component {
 
                             <Route exact path='/login' render={() => <LoginPage />} />
 
-                            <Route exact path='/register' render={() => <RegisterPage />} />
+                            <Route exact path='/register' render={() => <Register />} />
                         </Switch>
                     </div>
             </Suspense>

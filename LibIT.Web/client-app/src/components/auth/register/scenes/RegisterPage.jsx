@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { serverUrl } from '../../../config';
-import EclipseWidget from '../../common/eclipse';
+import { serverUrl } from '../../../../config';
+import EclipseWidget from '../../../common/eclipse';
 import axios from 'axios';
-import TextFieldGroup from '../../common/TextFieldGroup';
+import TextFieldGroup from '../../../common/TextFieldGroup';
 
 
 class RegisterPage extends Component {
@@ -13,14 +13,21 @@ class RegisterPage extends Component {
         email: "",
         password: "",
         errorMessage: "",
-        loading: false,
+        loading: this.props.loading,
         errors: {
             //firstName: "Введіть ім'я"
         }
     }
 
+    //визивається при зміні даних у пропсах
+    UNSAFE_componentWillReceiveProps = (nextProps) => {
+        console.log('Change props', nextProps);
+        this.setState({loading: nextProps.loading});
+    }
+
     onSubmitForm = (e) => {
         e.preventDefault();
+        this.props.registerUser();
         let errors = {};
         const regex_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
         const { firstName, lastName, email } = this.state;
@@ -81,6 +88,7 @@ class RegisterPage extends Component {
         //this.setState
     }
     render() {
+        console.log(this.props);
         //const errorMessage = this.state.errorMessage;
         const { firstName,
             lastName,

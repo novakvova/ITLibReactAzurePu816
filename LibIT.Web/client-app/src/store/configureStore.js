@@ -2,6 +2,9 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
+import { registerReducer } from '../components/auth/register/reducer';
+
+
 
 // Create browser history to use in the Redux store
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -9,7 +12,7 @@ export const history = createBrowserHistory({ basename: baseUrl });
 
 export default function configureStore(history, initialState) {
     const reducers = {
-      
+      register: registerReducer
     };
   
     const middleware = [
