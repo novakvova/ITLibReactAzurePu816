@@ -10,9 +10,13 @@ namespace LibIT.Web.Models
 
     public class UserRegisterViewModel
     {
+        [Required(ErrorMessage = "Поле не може бути пустим!")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "Поле не може бути пустим!")]
         public string Phone { get; set; }
+        [Required(ErrorMessage = "Поле не може бути пустим!")]
         public string ImageBase64 { get; set; }
+        [Required(ErrorMessage = "Поле не може бути пустим!")]
         public string Password { get; set; }
     }
 

@@ -17,7 +17,7 @@ using Microsoft.Extensions.Configuration;
 namespace LibIT.Web.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [Produces("application/json")]
     public class AccountController : ControllerBase
     {
         private readonly EfContext _context;
@@ -80,10 +80,12 @@ namespace LibIT.Web.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterViewModel model)
         {
+            //return Ok();
+
             if (!ModelState.IsValid)
             {
-                //var errrors = CustomValidator.GetErrorsByModel(ModelState);
-                return BadRequest("Bad Model");
+                var errors = CustomValidator.GetErrorsByModel(ModelState);
+                return BadRequest(errors);
             }
 
             var base64 = model.ImageBase64;

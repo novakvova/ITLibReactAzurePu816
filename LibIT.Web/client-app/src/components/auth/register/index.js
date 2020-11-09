@@ -5,7 +5,8 @@ import {registerUser} from './actions';
 const mapState = (stateRedux) =>
 {
     return {
-        loading: stateRedux.register.loading
+        loading: stateRedux.register.loading,
+        errors: stateRedux.register.errors,
     }
 }
 

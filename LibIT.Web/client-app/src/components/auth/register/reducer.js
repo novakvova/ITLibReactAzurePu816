@@ -1,6 +1,7 @@
 import * as types from './types';
 const intialState = {
-    loading: false
+    loading: false,
+    errors: {}
 }
 
 export const registerReducer = (state = intialState, action) => {
@@ -9,8 +10,23 @@ export const registerReducer = (state = intialState, action) => {
         case types.REGISTER_STARTED:
             return {
                 //...this.state,
-                loading: true
+                loading: true,
+                errors: {}
             }
+            break;
+            
+        case types.REGISTER_SUCCESS:
+            return {
+                loading: false,
+                errors: {}
+            }
+            break;
+
+        case types.REGISTER_FAILED:
+                return {
+                    loading: false,
+                    errors: action.errors
+                }
             break;
     
         default:

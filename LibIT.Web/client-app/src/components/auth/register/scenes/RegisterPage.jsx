@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { serverUrl } from '../../../../config';
 import EclipseWidget from '../../../common/eclipse';
-import axios from 'axios';
 import TextFieldGroup from '../../../common/TextFieldGroup';
 
 
@@ -11,23 +9,25 @@ class RegisterPage extends Component {
         firstName: "",
         lastName: "",
         email: "",
+        phone: "",
         password: "",
         errorMessage: "",
         loading: this.props.loading,
-        errors: {
-            //firstName: "Введіть ім'я"
-        }
+        errors: this.props.errors
     }
 
     //визивається при зміні даних у пропсах
     UNSAFE_componentWillReceiveProps = (nextProps) => {
         console.log('Change props', nextProps);
-        this.setState({loading: nextProps.loading});
+        this.setState({
+            loading: nextProps.loading,
+            errors: nextProps.errors } 
+        );
     }
 
     onSubmitForm = (e) => {
         e.preventDefault();
-        this.props.registerUser();
+        
         let errors = {};
         const regex_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
         const { firstName, lastName, email } = this.state;
@@ -54,24 +54,23 @@ class RegisterPage extends Component {
         const isValid = Object.keys(errors).length === 0;
         if (isValid) {
             //serverUrl
-            const url = `${serverUrl}api/Account/register`;
             const model = {
                 Email: email
             };
-           
-            axios.post(url, model)
-                .then(
-                    (resp) => {
-                        this.setState({loading: false });
-                    },
-                    (badResp) => {
-                        this.setState({loading: false });
-                    }
-                )
-                .catch(err => {
-                    console.log("Global server prooblem in controller message", err);
-                    this.setState({loading: false });
-                });
+            this.props.registerUser(model);
+            // axios.post(url, model)
+            //     .then(
+            //         (resp) => {
+            //             this.setState({loading: false });
+            //         },
+            //         (badResp) => {
+            //             this.setState({loading: false });
+            //         }
+            //     )
+            //     .catch(err => {
+            //         console.log("Global server prooblem in controller message", err);
+            //         this.setState({loading: false });
+            //     });
             //ajax in server
             this.setState({ errorMessage: "", errors, loading: true });
         }
@@ -88,11 +87,13 @@ class RegisterPage extends Component {
         //this.setState
     }
     render() {
-        console.log(this.props);
+        console.log("Regiter props: ", this.props);
+        console.log("Regiter state: ", this.state);
         //const errorMessage = this.state.errorMessage;
         const { firstName,
             lastName,
             email,
+            phone,
             password,
             errorMessage,
             loading,
@@ -172,12 +173,15 @@ class RegisterPage extends Component {
                                         value={email} />
                                 </div>
                                 {!!errors["email"] && <p className="text-danger">{errors["email"]}</p>} */}
-                                <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"> <i className="fa fa-phone"></i> </span>
-                                    </div>
-                                    <input name="" className="form-control" placeholder="Phone number" type="text" />
-                                </div>
+
+
+                                <TextFieldGroup 
+                                    field="phone"
+                                    value={phone}
+                                    label="Телефон"
+                                    icon="fa fa-user"
+                                    error={errors.phone}
+                                    onChange={this.handlerChange}/>
 
                                 <TextFieldGroup 
                                     field="password"
