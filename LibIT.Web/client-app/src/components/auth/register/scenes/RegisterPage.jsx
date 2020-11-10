@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import EclipseWidget from '../../../common/eclipse';
 import TextFieldGroup from '../../../common/TextFieldGroup';
-
+import PhoneFieldGroup from '../../../common/PhoneFieldGroup';
+import { validateFields } from "./validation";
 
 class RegisterPage extends Component {
     state = {
@@ -11,6 +12,7 @@ class RegisterPage extends Component {
         email: "",
         phone: "",
         password: "",
+        confirmPassword: "",
         errorMessage: "",
         loading: this.props.loading,
         errors: this.props.errors
@@ -27,51 +29,17 @@ class RegisterPage extends Component {
 
     onSubmitForm = (e) => {
         e.preventDefault();
-        
-        let errors = {};
-        const regex_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-        const { firstName, lastName, email } = this.state;
-        if (firstName.trim() === "") {
-            errors = {
-                ...errors,
-                firstName: "Введіть ім'я"
-            };
-        }
 
-        if (lastName.trim() === "") {
-            errors = {
-                ...errors,
-                lastName: "Введіть прізвище"
-            };
-        }
-
-        if (!regex_email.test(email.trim())) {
-            errors = {
-                ...errors,
-                email: "Не вірна електронна пошта!"
-            };
-        }
+        const errors = validateFields(this.state);
+       
         const isValid = Object.keys(errors).length === 0;
         if (isValid) {
             //serverUrl
             const model = {
-                Email: email
+                Email: this.state.email
             };
             this.props.registerUser(model);
-            // axios.post(url, model)
-            //     .then(
-            //         (resp) => {
-            //             this.setState({loading: false });
-            //         },
-            //         (badResp) => {
-            //             this.setState({loading: false });
-            //         }
-            //     )
-            //     .catch(err => {
-            //         console.log("Global server prooblem in controller message", err);
-            //         this.setState({loading: false });
-            //     });
-            //ajax in server
+            
             this.setState({ errorMessage: "", errors, loading: true });
         }
         else {
@@ -95,6 +63,7 @@ class RegisterPage extends Component {
             email,
             phone,
             password,
+            confirmPassword,
             errorMessage,
             loading,
             errors
@@ -117,21 +86,6 @@ class RegisterPage extends Component {
                                 <span className="bg-light">OR</span>
                             </p>
                             <form onSubmit={this.onSubmitForm}>
-                                {/* <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"> <i className="fa fa-user"></i> </span>
-                                    </div>
-                                    <input className="form-control"
-                                        onChange={this.handlerChange}
-                                        placeholder="First name"
-                                        type="text"
-                                        id="firstName"
-                                        name="firstName"
-                                        value={firstName} />
-                                </div>
-                                <p className="text-danger">{errors["firstName"]}</p> */}
-
-
                                 <TextFieldGroup 
                                     field="firstName"
                                     value={firstName}
@@ -160,26 +114,11 @@ class RegisterPage extends Component {
                                     error={errors.email}
                                     onChange={this.handlerChange}/>
                                 
-                                {/* <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
-                                    </div>
-                                    <input name="" className={classnames("form-control", {"is-invalid": !!errors["email"]}) }
-                                        onChange={this.handlerChange}
-                                        placeholder="Email address"
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value={email} />
-                                </div>
-                                {!!errors["email"] && <p className="text-danger">{errors["email"]}</p>} */}
-
-
-                                <TextFieldGroup 
+                                <PhoneFieldGroup 
                                     field="phone"
                                     value={phone}
                                     label="Телефон"
-                                    icon="fa fa-user"
+                                    icon="fa fa-phone"
                                     error={errors.phone}
                                     onChange={this.handlerChange}/>
 
@@ -193,20 +132,17 @@ class RegisterPage extends Component {
                                     error={errors.password}
                                     onChange={this.handlerChange}/>
 
+                                <TextFieldGroup 
+                                    field="confirmPassword"
+                                    value={confirmPassword}
+                                    label="Підтверження пароля"
+                                    icon="fa fa-lock"
+                                    type="password"
+                                    //placeholder="Email"
+                                    error={errors.confirmPassword}
+                                    onChange={this.handlerChange}/>
 
-                                {/* <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
-                                    </div>
-                                    <input className="form-control" placeholder="Password" type="password" />
-                                </div> */}
-                                <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
-                                    </div>
-                                    <input className="form-control" placeholder="Confirm password" type="password" />
-                                </div>
-                                <div className="form-group">
+                                 <div className="form-group">
                                     <button type="submit" className="btn btn-primary btn-block"> Create Account  </button>
                                 </div>
                                 <p className="text-center">Have an account? <Link to="/login">Log In</Link> </p>
