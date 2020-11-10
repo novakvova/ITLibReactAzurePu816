@@ -15,7 +15,7 @@ function validateFields(items) {
 
     if (!regex_phone.test(phone.trim())) errors.phone = "Не правильний формат телефону +xx (xxx) xxx xx xx!";
 
-    if (!regex_password.test(password.trim())) errors.password = "Не коректно вказано пароль!";
+    if (!regex_password.test(password.trim())) errors.password = "Пароль повинен мати мінімум 6 символів, нижній і верхній регістр, та цифри!";
         
     if (confirmPassword !== password) errors.confirmPassword = "Повтор паролю не співпадає!";
     return errors;

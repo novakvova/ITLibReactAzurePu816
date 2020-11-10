@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import EclipseWidget from '../../../common/eclipse';
 import TextFieldGroup from '../../../common/TextFieldGroup';
 import PhoneFieldGroup from '../../../common/PhoneFieldGroup';
+import ImageFieldGroupCropper from "../../../common/ImageFieldGroupCropper";
 import { validateFields } from "./validation";
 
 class RegisterPage extends Component {
@@ -11,6 +12,7 @@ class RegisterPage extends Component {
         lastName: "",
         email: "",
         phone: "",
+        photo: "",
         password: "",
         confirmPassword: "",
         errorMessage: "",
@@ -34,9 +36,13 @@ class RegisterPage extends Component {
        
         const isValid = Object.keys(errors).length === 0;
         if (isValid) {
-            //serverUrl
             const model = {
-                Email: this.state.email
+                FirstName: this.state.firstName,
+                LastName: this.state.lastName,
+                Email: this.state.email,
+                Phone: this.state.phone,
+                Password: this.state.password,
+                ConfirmPassword: this.state.confirmPassword
             };
             this.props.registerUser(model);
             
@@ -117,10 +123,12 @@ class RegisterPage extends Component {
                                 <PhoneFieldGroup 
                                     field="phone"
                                     value={phone}
-                                    label="Телефон"
+                                    label="Телефон" 
                                     icon="fa fa-phone"
                                     error={errors.phone}
                                     onChange={this.handlerChange}/>
+
+                                <ImageFieldGroupCropper />
 
                                 <TextFieldGroup 
                                     field="password"
