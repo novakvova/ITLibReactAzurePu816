@@ -23,7 +23,9 @@ export class ImageFieldGroupCropper extends Component {
               />
             </div>
             <div className="col-md-8 col-9 d-flex align-content-center flex-wrap">
-              <CropperModal />
+                  <CropperModal
+                      getCroppedImage={this.props.getCroppedImage}
+                      error={ this.props.error} />
             </div>
           </div>
         //   </div>
@@ -33,9 +35,9 @@ export class ImageFieldGroupCropper extends Component {
   }
   
   ImageFieldGroupCropper.propTypes = {
-    // getCroppedImage: PropTypes.func.isRequired,
-    // error: PropTypes.string,
-    // photo: PropTypes.string.isRequired
+     getCroppedImage: PropTypes.func.isRequired,
+     error: PropTypes.string,
+     photo: PropTypes.string.isRequired
   };
   
   ImageFieldGroupCropper.defaultProps = {};

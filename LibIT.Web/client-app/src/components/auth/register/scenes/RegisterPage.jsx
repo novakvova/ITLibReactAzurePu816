@@ -29,6 +29,19 @@ class RegisterPage extends Component {
         );
     }
 
+    getCroppedImage = img => {
+        if (!!this.state.errors["photo"]) {
+            let errors = Object.assign({}, this.state.errors);
+            delete errors["photo"];
+            this.setState({
+                photo: img,
+                errors
+            });
+        } else {
+            this.setState({ photo: img });
+        }
+    };
+
     onSubmitForm = (e) => {
         e.preventDefault();
 
@@ -68,6 +81,7 @@ class RegisterPage extends Component {
             lastName,
             email,
             phone,
+            photo,
             password,
             confirmPassword,
             errorMessage,
@@ -128,7 +142,11 @@ class RegisterPage extends Component {
                                     error={errors.phone}
                                     onChange={this.handlerChange}/>
 
-                                <ImageFieldGroupCropper />
+                                <ImageFieldGroupCropper
+                                    getCroppedImage={this.getCroppedImage}
+                                    error={errors.photo}
+                                    photo={photo}
+                                />
 
                                 <TextFieldGroup 
                                     field="password"
