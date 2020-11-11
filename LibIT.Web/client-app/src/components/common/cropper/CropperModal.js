@@ -101,17 +101,28 @@ class CropperModal extends Component {
                         <div className="col-12 col-lg-8">
                             <div className="card">
                                 <div className="card-body">
-                                    <div style={{ width: "100%" }}>
-                                        <Cropper
-                                            style={{ height: 400, width: "100%" }}
-                                            preview=".img-preview"
-                                            aspectRatio={1 / 1}
-                                            guides={false}
-                                            viewMode={1}
-                                            dragMode="move"
-                                            src={src}
-                                            onInitialized={this.onCropperInit.bind(this)}
-                                        />
+                                    <div className="row">
+                                        <div className="col-md-8">
+                                        <div style={{ width: "100%" }}>
+                                            <Cropper
+                                                style={{ height: 400, width: "100%" }}
+                                                preview=".img-preview"
+                                                aspectRatio={1 / 1}
+                                                guides={false}
+                                                viewMode={1}
+                                                dragMode="move"
+                                                src={src}
+                                                onInitialized={this.onCropperInit.bind(this)}
+                                            />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-4">
+                                            <h1>Preview</h1>
+                                            <div
+                                                className="img-preview"
+                                                style={{ width: "100%", float: "left", height: "300px" }}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="card-footer">
