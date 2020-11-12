@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export class ImageFieldGroupCropper extends Component {
     render() {
-      const { photo } = this.props;
+      const { photo, error } = this.props;
       let image =
         "https://ae01.alicdn.com/kf/H493bb4d7e44f469ca1f64c9508101e19K/PrettyAngel-Good-Smile-GSC-No-1157-My-Hero-academic-Ochaco-Uraraka-Hero.jpg_q50.jpg";
       if (!!photo) {
@@ -25,8 +25,9 @@ export class ImageFieldGroupCropper extends Component {
             <div className="col-md-8 col-9 d-flex align-content-center flex-wrap">
                   <CropperModal
                       getCroppedImage={this.props.getCroppedImage}
-                      error={ this.props.error} />
+                      error={ error } />
             </div>
+            {!!error && <p className="text-danger">{error}</p>}
           </div>
         //   </div>
         // </div>

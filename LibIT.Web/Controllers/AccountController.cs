@@ -88,7 +88,7 @@ namespace LibIT.Web.Controllers
                 return BadRequest(errors);
             }
 
-            var base64 = model.ImageBase64;
+            var base64 = model.Photo;
             if (base64.Contains(","))
             {
                 base64 = base64.Split(',')[1];

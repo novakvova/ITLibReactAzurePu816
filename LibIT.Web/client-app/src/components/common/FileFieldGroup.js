@@ -27,7 +27,7 @@ const FileFieldGroup = ({
             <label className="custom-file-label" htmlFor={field}>
                 {label}
             </label>
-            {!!error && <div className="invalid-feedback">{error}</div>}
+            {!!error && <p className="text-danger">{error}</p>}
         </div>
         </>
     );

@@ -54,6 +54,7 @@ class RegisterPage extends Component {
                 LastName: this.state.lastName,
                 Email: this.state.email,
                 Phone: this.state.phone,
+                Photo: this.state.photo,
                 Password: this.state.password,
                 ConfirmPassword: this.state.confirmPassword
             };
