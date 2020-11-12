@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { registerReducer } from '../components/auth/register/reducer';
+import { loginReducer } from '../components/auth/login/reducer';
 
 
 
@@ -12,7 +13,8 @@ export const history = createBrowserHistory({ basename: baseUrl });
 
 export default function configureStore(history, initialState) {
     const reducers = {
-      register: registerReducer
+      register: registerReducer,
+      login: loginReducer
     };
   
     const middleware = [

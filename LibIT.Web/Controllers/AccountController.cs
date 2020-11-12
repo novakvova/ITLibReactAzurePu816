@@ -50,8 +50,8 @@ namespace LibIT.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //var errrors = CustomValidator.GetErrorsByModel(ModelState);
-                return BadRequest("Bad Model");
+                var errors = CustomValidator.GetErrorsByModel(ModelState);
+                return BadRequest(errors);
             }
 
             var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);

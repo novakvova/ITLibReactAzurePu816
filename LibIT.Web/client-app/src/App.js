@@ -17,7 +17,7 @@ import './App.css';
 const HomePage = React.lazy(() => import('./components/home/HomePage'));
 const Navbar = React.lazy(() => import('./components/navbar/Navbar'));
 const Register = React.lazy(() => import('./components/auth/register'));
-const LoginPage = React.lazy(() => import('./components/auth/login/LoginPage'));
+const Login = React.lazy(() => import('./components/auth/login'));
 
 class App extends Component {
     render() {
@@ -29,7 +29,7 @@ class App extends Component {
                         <Switch>
                             <Route exact path='/' render={() => <HomePage />} />
 
-                            <Route exact path='/login' render={() => <LoginPage />} />
+                            <Route exact path='/login' render={() => <Login />} />
 
                             <Route exact path='/register' render={() => <Register />} />
                         </Switch>
