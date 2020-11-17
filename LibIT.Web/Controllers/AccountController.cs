@@ -57,7 +57,7 @@ namespace LibIT.Web.Controllers
             var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
             if (user == null)
             {
-                return BadRequest(new { invalid = "Даний користувач не знайденний" });
+                return BadRequest(new { invalid = "Не вірний логін або пароль" });
             }
 
             var result = _signInManager
@@ -65,7 +65,7 @@ namespace LibIT.Web.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(new { invalid = "Невірно введений пароль" });
+                return BadRequest(new { invalid = "Не вірний логін або пароль" });
             }
 
             await _signInManager.SignInAsync(user, isPersistent: false);

@@ -7,6 +7,7 @@ export const loginUser = (model) => {
         dispatch({type: types.LOGIN_STARTED});
         LoginService.loginUser(model)
             .then((response)=>{
+                console.log("Data server success:", response);
                 dispatch({type: types.LOGIN_SUCCESS});
                 dispatch(push('/'));
 

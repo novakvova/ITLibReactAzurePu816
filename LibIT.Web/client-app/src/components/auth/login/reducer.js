@@ -1,7 +1,9 @@
 import * as types from './types';
 const intialState = {
     loading: false,
-    errors: {}
+    errors: {
+        invalid: "Щось пішло не так! У нас проблеми"
+    }
 }
 
 export const loginReducer = (state = intialState, action) => {
