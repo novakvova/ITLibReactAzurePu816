@@ -30,7 +30,7 @@ class CropperModal extends Component {
                 const file_name = files[0].name;
                 const reader = new FileReader();
                 reader.onload = () => {
-                    
+                    //console.log(reader.result);
                     this.setState({ src: reader.result, label: file_name });
                     this.toggle(e);
                 };
